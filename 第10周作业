@@ -1,0 +1,103 @@
+int lineCount = 0; // 计数器变量，用于记录绘制的线条数量
+int lineCount0 = 0;
+int lineCount1 = 0;
+int lineCount2 = 0;
+int lineCount3 = 0;
+int lineCount4 = 0;
+int lineCount5 = 0;
+int lineCount6 = 0;
+int lineCount7 = 0;
+//挂图289
+
+
+void setup() {
+  size(800, 800);
+  background(0);
+  frameRate(6); // 设置帧率为1，即每秒绘制1帧
+}
+
+void draw() {
+  stroke(255); // 设置线条颜色为白色
+  strokeWeight(2); // 设置线条粗细为2像素
+  
+  int numRays = 24; // 射线的数量
+  int numRays0 = 10; // 射线的数量
+  float centerX = width / 2; // 起点的x坐标
+  float centerY = height / 2; // 起点的y坐标
+  if (lineCount < numRays) {
+    float randomAngle = random(0, 360);
+    float angle = radians(randomAngle); // 计算当前射线的角度
+    float endX =  random(0, 800); // 计算射线终点的x坐标
+    float endY =  random(0, 800); // 计算射线终点的y坐标
+     save("C:\\Users\\30957\\Desktop\\123\\"+ frameCount + ".png");
+    line(centerX, centerY, endX, endY); // 绘制一条射线
+    lineCount++; // 计数器递增
+  }
+  if (lineCount0 < numRays0) {
+    float randomAngle = random(0, 360);
+    float angle = radians(randomAngle); // 计算当前射线的角度
+    float endX =  random(0, 800); // 计算射线终点的x坐标
+    float endY =  random(0, 800); // 计算射线终点的y坐标
+    line(0, height, endX, endY); // 绘制一条射线
+    
+    lineCount0++; // 计数器递增
+  }
+   if (lineCount1 < numRays0) {
+    float randomAngle = random(0, 360);
+    float angle = radians(randomAngle); // 计算当前射线的角度
+    float endX =  random(0, 800); // 计算射线终点的x坐标
+    float endY =  random(0, 800); // 计算射线终点的y坐标
+    line(0, 0, endX, endY); // 绘制一条射线
+    lineCount1++; // 计数器递增
+  }
+     if (lineCount2 < numRays0) {
+    float randomAngle = random(0, 360);
+    float angle = radians(randomAngle); // 计算当前射线的角度
+    float endX =  random(0, 800); // 计算射线终点的x坐标
+    float endY =  random(0, 800); // 计算射线终点的y坐标
+    line(width, 0, endX, endY); // 绘制一条射线
+    lineCount2++; // 计数器递增
+  }
+       if (lineCount3 < numRays0) {
+    float randomAngle = random(0, 360);
+    float angle = radians(randomAngle); // 计算当前射线的角度
+    float endX =  random(0, 800); // 计算射线终点的x坐标
+    float endY =  random(0, 800); // 计算射线终点的y坐标
+    line(height, width, endX, endY); // 绘制一条射线
+    lineCount3++; // 计数器递增
+  }
+       if (lineCount3 < numRays0) {
+    float randomAngle = random(0, 360);
+    float angle = radians(randomAngle); // 计算当前射线的角度
+    float endX =  random(0, 800); // 计算射线终点的x坐标
+    float endY =  random(0, 800); // 计算射线终点的y坐标
+    line(centerX,0, endX, endY); // 绘制一条射线
+    lineCount4++; // 计数器递增
+  }
+         if (lineCount3 < numRays0) {
+    float randomAngle = random(0, 360);
+    float angle = radians(randomAngle); // 计算当前射线的角度
+    float endX =  random(0, 800); // 计算射线终点的x坐标
+    float endY =  random(0, 800); // 计算射线终点的y坐标
+    line(0,centerY, endX, endY); // 绘制一条射线
+    lineCount5++; // 计数器递增
+  }
+           if (lineCount3 < numRays0) {
+    float randomAngle = random(0, 360);
+    float angle = radians(randomAngle); // 计算当前射线的角度
+    float endX =  random(0, 800); // 计算射线终点的x坐标
+    float endY =  random(0, 800); // 计算射线终点的y坐标
+    line(height,centerY, endX, endY); // 绘制一条射线
+    lineCount6++; // 计数器递增
+    
+}
+ if (lineCount3 < numRays0) {
+    float randomAngle = random(0, 360);
+    float angle = radians(randomAngle); // 计算当前射线的角度
+    float endX =  random(0, 800); // 计算射线终点的x坐标
+    float endY =  random(0, 800); // 计算射线终点的y坐标
+    line(centerX,width, endX, endY); // 绘制一条射线
+    lineCount7++; // 计数器递增
+}
+
+}
