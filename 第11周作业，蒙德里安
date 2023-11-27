@@ -1,0 +1,122 @@
+int canvasWidth = 1200;  // 画布宽度
+int canvasHeight = 900; // 画布高度
+
+int numHorizontalLines = 8; // 横线数量
+int numVerticalLines = 8; // 竖线数量
+
+int lineHeight=canvasHeight / numHorizontalLines;//取平均
+int lineWidth=canvasWidth / numHorizontalLines;//取平均
+int cishu = (numHorizontalLines*numVerticalLines)/12;
+
+int[] numbers1; // 存储横线位置
+int[] numbers2; // 存储竖线位置
+
+boolean reLayout = false;
+void setup() {
+  size(1000, 800);
+  background(255);
+  
+   numbers1 = new int[numHorizontalLines]; // 初始化存储随机数的数组
+   numbers2 = new int[numHorizontalLines]; // 初始化存储随机数的数组
+ 
+  drawComposition();
+  fill_color();
+
+}
+
+void drawComposition() {
+    background(255); // 清除画布上的内容
+  for (int i = 0; i < numHorizontalLines; i++) {   //横线
+  int y = i * lineHeight;
+  int offset = int(random(-30, 30)); // 随机选择偏移量
+  strokeWeight(5);
+  stroke(0);
+  line(0, y + offset, canvasWidth, y + offset);
+  numbers1[i]=y + offset;
+ // println(numbers1[i]);
+  }
+  
+  for (int i = 0; i < numHorizontalLines; i++) {   //竖线
+  int x = i * lineWidth;
+  int offset = int(random(-30, 30)); // 随机选择偏移量
+  strokeWeight(5);
+  stroke(0);
+  line(x + offset,0 , x + offset,canvasHeight);
+
+  numbers2[i]=x + offset;
+  //println(numbers2[i]);
+  }
+   //numbers1[0]=0;
+   //numbers2[0]=0;
+   fill_color();
+ }
+   void fill_color(){
+      for (int i = 0; i < 7; i++) { //上白色
+      for (int u = 0; u < 7; u++) {
+ fill(255, 255, 255);
+ rect(numbers2[i], numbers1[u],numbers2[i+1]- numbers2[i], numbers1[u+1]-numbers1[u]);
+ }
+      }
+ for (int i = 0; i < cishu*4; i++) { //上蓝色
+ int a = int(random(0,7));
+ int b = int(random(0,7));
+ fill(0, 0, 255);
+ rect(numbers2[a], numbers1[b],numbers2[a+1]- numbers2[a], numbers1[b+1]-numbers1[b]);
+ }
+  for (int i = 0; i < cishu*4; i++) { //上红色
+ int a = int(random(0,7));
+ int b = int(random(0,7));
+ fill(255, 0, 0);
+ rect(numbers2[a], numbers1[b],numbers2[a+1]- numbers2[a], numbers1[b+1]-numbers1[b]);
+ }
+
+    for (int i = 0; i < cishu*2; i++) { //上黄色
+ int a = int(random(0,7));
+ int b = int(random(0,7));
+ fill(255, 255, 0);
+ rect(numbers2[a], numbers1[b],numbers2[a+1]- numbers2[a], numbers1[b+1]-numbers1[b]);
+ }
+    for (int i = 0; i < cishu*1; i++) { //上黑色
+ int a = int(random(0,7));
+ int b = int(random(0,7));
+ fill(0, 0, 0);
+ rect(numbers2[a], numbers1[b],numbers2[a+1]- numbers2[a], numbers1[b+1]-numbers1[b]);
+ }
+}
+void draw() {
+    if (reLayout) {
+    drawComposition();
+    fill_color();
+    reLayout = false; // 重新布局后将 reLayout 设置为 false，避免重复绘制
+  }
+  drawButton1();
+  drawButton2() ;
+}
+void drawButton1() {
+  // 绘制按钮
+  stroke(0);
+  fill(255);
+  rect(20, 20, 100, 40);
+  fill(0);
+  textAlign(CENTER, CENTER);
+  text("remake", 70, 40);
+
+  // 判断鼠标是否点击了按钮
+  if (mousePressed && mouseX >= 20 && mouseX <= 120 && mouseY >= 20 && mouseY <= 60) {
+    drawComposition(); // 点击按钮时触发重新布局
+  }
+}
+  void drawButton2() {
+  // 绘制按钮2
+  stroke(0);
+  fill(255);
+  rect(150, 20, 100, 40);
+  fill(0);
+  textAlign(CENTER, CENTER);
+  text("color_change", 200, 40);
+
+  // 判断鼠标是否点击了按钮
+if (mousePressed && mouseX >= 150 && mouseX <= 250 && mouseY >= 20 && mouseY <= 60) {
+   fill_color(); // 点击按钮时触发重新布局
+} 
+}
