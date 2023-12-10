@@ -1,0 +1,69 @@
+// 雨滴数组
+Raindrop[] raindrops;
+PImage backgroundImage; // 声明背景图片变量
+
+void setup() {
+  size(663, 1000);
+  frameRate(30);
+  raindrops = new Raindrop[100];
+ 
+  // 初始化雨滴数组
+  for (int i = 0; i < raindrops.length; i++) {
+    raindrops[i] = new Raindrop();
+  }
+ background(0);
+  // 加载背景图片
+  backgroundImage = loadImage("th.jpg");
+}
+
+void draw() {
+  // 更新和显示每个雨滴
+  for (int i = 0; i < raindrops.length; i++) {
+    raindrops[i].fall();
+    raindrops[i].display();
+  }
+}
+
+// 雨滴类
+class Raindrop {
+  float x, y, length, thickness, speed;
+
+  // 构造函数，用于初始化雨滴的属性
+  Raindrop() {
+    x = random(width); // 随机初始x位置
+    y = random(-500, -50); // 随机初始y位置
+    length = 20; // 随机长度
+    thickness = 1; // 随机粗细
+    speed = random(10,20); // 随机速度
+  }
+
+  // 雨滴的下落方法
+  void fall() {
+    y += speed; // 下雨滴垂直移动
+
+    // 如果雨滴超出画布，重新设置位置
+    if (y > height) {
+      y = random(-200, -100);
+      x = random(width);
+    }
+  }
+
+  // 雨滴的显示方法
+  void display() {
+    float px = constrain(x, 0, width - 1);
+    float py = constrain(y, 0, height - 1);
+
+    // 获取预设图片在当前位置的颜色
+    int pixelColor = backgroundImage.get(int(px), int(py));
+
+    // 绘制原始雨滴
+    stroke(pixelColor); // 设置雨滴颜色
+    strokeWeight(thickness); // 设置雨滴粗细
+    line(x, y, x, y + length); // 绘制雨滴
+
+    // 绘制黑色雨滴
+    stroke(0); // 设置黑色
+    line(x, y + length, x, y + length * 20); // 绘制黑色雨滴
+    //     save("C:\\Users\\30957\\Desktop\\123\\"+ frameCount + ".png");
+  }
+}
