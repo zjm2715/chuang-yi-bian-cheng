@@ -1,0 +1,155 @@
+import peasy.*; // 导入Peasy库
+PeasyCam cam; // PeasyCam对象用于交互式地控制相机视角
+
+int index; // 当前帧数的索引
+int xSection = 50; // x轴方向上的网格数量
+int ySection = 50; // y轴方向上的网格数量
+
+float[][] RValue; // 二维数组，存储每个网格的亮度值
+float[][] GValue; // 二维数组，存储每个网格的亮度值
+float[][] BValue; // 二维数组，存储每个网格的亮度值
+
+float xVar = 0.01; // x轴方向上的噪声变化速度
+float yVar = 0.01; // y轴方向上的噪声变化速度
+float tVar = 0.005; // 时间维度上的噪声变化速度
+
+void setup() {
+  size(400, 400, P3D);
+    cam = new PeasyCam(this,400); // 创建PeasyCam对象，将相机初始位置设置为(0, 0, 400)
+}
+
+void draw() {
+  background(0);
+  
+  // 移动绘图原点到画布中心
+  translate(width/2, height/2, 0);
+  
+  // 绘制盒子
+  noStroke(); // 不描边
+  drawBox();
+}
+
+void drawBox() {
+  
+   float xCellSize = width / xSection; // 计算每个网格在x轴方向上的大小
+  float yCellSize = height / ySection; // 计算每个网格在y轴方向上的大小
+
+ 
+  // 绘制盒子的六个面
+  beginShape(QUADS);
+  // 面1
+  for (int x = 0; x < xSection; x++) {
+    for (int y = 0; y < ySection; y++) {
+float r = noise(x * xVar, y * yVar, index * tVar) * 255; // 使用噪声生成红色通道的值
+float g = noise((x+100) * xVar, y * yVar, index * tVar) * 255; // 使用稍微不同的噪声生成绿色通道的值
+float b = noise((x+200) * xVar, y * yVar, index * tVar) * 255; // 使用略微不同的噪声生成蓝色通道的值 
+   noStroke(); // 不描边
+   beginShape();  
+  // 定义顶点
+  fill(r,g,b);
+  vertex(x * xCellSize,y * yCellSize,0);
+  vertex((x+1) * xCellSize, y * yCellSize,0);
+  vertex((x+1) * xCellSize, (y+1) * yCellSize,0);
+  vertex(x * xCellSize, (y+1) * yCellSize,0);
+  // 结束形状的定义并绘制出来
+  endShape(CLOSE);
+    }
+  }
+  
+  // 面2
+  for (int x = 0; x < xSection; x++) {
+    for (int y = 0; y < ySection; y++) {
+float r = noise(x * xVar, y * yVar, index * tVar) * 255; // 使用噪声生成红色通道的值
+float g = noise((x+130) * xVar, y * yVar, index * tVar) * 255; // 使用稍微不同的噪声生成绿色通道的值
+float b = noise((x+230) * xVar, y * yVar, index * tVar) * 255; // 使用略微不同的噪声生成蓝色通道的值 
+   noStroke(); // 不描边
+   beginShape();  
+  // 定义顶点
+  fill(r,g,b);
+  vertex(x * xCellSize,y * yCellSize,400);
+  vertex((x+1) * xCellSize, y * yCellSize,400);
+  vertex((x+1) * xCellSize, (y+1) * yCellSize,400);
+  vertex(x * xCellSize, (y+1) * yCellSize,400);
+  // 结束形状的定义并绘制出来
+  endShape(CLOSE);
+    }
+  }
+  
+   // 面3
+  for (int x = 0; x < xSection; x++) {
+    for (int y = 0; y < ySection; y++) {
+float r = noise(x * xVar, y * yVar, index * tVar) * 255; // 使用噪声生成红色通道的值
+float g = noise((x+150) * xVar, y * yVar, index * tVar) * 255; // 使用稍微不同的噪声生成绿色通道的值
+float b = noise((x+250) * xVar, y * yVar, index * tVar) * 255; // 使用略微不同的噪声生成蓝色通道的值 
+   noStroke(); // 不描边
+   beginShape();  
+  // 定义顶点
+  fill(r,g,b);
+  vertex(x * xCellSize,400,y * yCellSize);
+  vertex((x+1) * xCellSize, 400,y * yCellSize);
+  vertex((x+1) * xCellSize,400 ,(y+1) * yCellSize);
+  vertex(x * xCellSize,400 ,(y+1) * yCellSize);
+  // 结束形状的定义并绘制出来
+  endShape(CLOSE);
+    }
+  }
+    // 面4
+  for (int x = 0; x < xSection; x++) {
+    for (int y = 0; y < ySection; y++) {
+float r = noise(x * xVar, y * yVar, index * tVar) * 255; // 使用噪声生成红色通道的值
+float g = noise((x+130) * xVar, y * yVar, index * tVar) * 255; // 使用稍微不同的噪声生成绿色通道的值
+float b = noise((x+270) * xVar, y * yVar, index * tVar) * 255; // 使用略微不同的噪声生成蓝色通道的值 
+   noStroke(); // 不描边
+   beginShape();  
+  // 定义顶点
+  fill(r,g,b);
+  vertex(400,x * xCellSize,y * yCellSize);
+  vertex(400, (x+1) * xCellSize,y * yCellSize);
+  vertex(400,(x+1) * xCellSize ,(y+1) * yCellSize);
+  vertex(400, x * xCellSize ,(y+1) * yCellSize);
+  // 结束形状的定义并绘制出来
+  endShape(CLOSE);
+    }
+  }
+  // 面5
+  for (int x = 0; x < xSection; x++) {
+    for (int y = 0; y < ySection; y++) {
+float r = noise(x * xVar, y * yVar, index * tVar) * 255; // 使用噪声生成红色通道的值
+float g = noise((x+130) * xVar, y * yVar, index * tVar) * 255; // 使用稍微不同的噪声生成绿色通道的值
+float b = noise((x+270) * xVar, y * yVar, index * tVar) * 255; // 使用略微不同的噪声生成蓝色通道的值 
+   noStroke(); // 不描边
+   beginShape();  
+  // 定义顶点
+  fill(r,g,b);
+  vertex(0,x * xCellSize,y * yCellSize);
+  vertex(0, (x+1) * xCellSize,y * yCellSize);
+  vertex(0,(x+1) * xCellSize ,(y+1) * yCellSize);
+  vertex(0, x * xCellSize ,(y+1) * yCellSize);
+  // 结束形状的定义并绘制出来
+  endShape(CLOSE);
+    }
+  }
+    // 面6
+  for (int x = 0; x < xSection; x++) {
+    for (int y = 0; y < ySection; y++) {
+float r = noise((x+random(256)) * xVar, y * yVar, index * tVar) * 255; // 使用噪声生成红色通道的值
+float g = noise((x+150) * xVar, y * yVar, index * tVar) * 255; // 使用稍微不同的噪声生成绿色通道的值
+float b = noise((x+250) * xVar, y * yVar, index * tVar) * 255; // 使用略微不同的噪声生成蓝色通道的值 
+   noStroke(); // 不描边
+   beginShape();  
+  // 定义顶点
+  fill(r,g,b);
+  vertex(x * xCellSize,0,y * yCellSize);
+  vertex((x+1) * xCellSize, 0,y * yCellSize);
+  vertex((x+1) * xCellSize,0 ,(y+1) * yCellSize);
+  vertex(x * xCellSize,0 ,(y+1) * yCellSize);
+  // 结束形状的定义并绘制出来
+  endShape(CLOSE);
+    }
+  } 
+    
+  
+  index++; // 增加帧数索引
+ 
+  endShape();
+}
